@@ -2,6 +2,7 @@
 // and creates one resource at id 123.
 var Promise = require('bluebird');
 var _ = require('lodash');
+var bair = require('./Bair100.js');
 
 var singleton = null;
 
@@ -16,8 +17,9 @@ module.exports = function(config) {
   var _Setup = {
     resource: {
       _id: '3',
-      a: 'the val at a',
+    /*  a: 'the val at a',
       anemptystring: '',
+     */
     },
     meta: {
       _mediaType: 'application/vnd.oada.TEST.1+json',
@@ -39,30 +41,32 @@ module.exports = function(config) {
     },
     auth_user: {
       username: 'frank',
-      password: 'test',
+      password: 'pass',
       resource: { _id: '1' }, // link to user resource
     },
     token: {
       token: config.test.auth.token,
+//      token: 5,
       user: { _id: 'frank' }, // username of this user
     },
   
     setup: function() {
       // Create the resource:
       return res_driver.put('/'+_Setup.resource._id,
-        _.cloneDeep(_Setup.resource),  // PUT will remove the _id without cloning: don't want that!
+ //       _.cloneDeep(_Setup.resource),  // PUT will remove the _id without cloning: don't want that!
+          _.cloneDeep(bair),
         { _meta: _Setup.meta }
-      )
   
       // Create the bookmark:
-      .then(function() {
-        return res_driver.put('/'+_Setup.user.bookmarks._id, { }, { _meta: _Setup.meta });
+      ).then(function() {
+//        return res_driver.put('/'+_Setup.user.bookmarks._id, {}, { _meta: _Setup.meta });
+        return res_driver.put('/'+_Setup.user.bookmarks._id+'/harvest/as-harvested/maps/wet-yield', {
+           'geohash-7': { _id: _Setup.resource._id, _rev: ''}}, { _meta: _Setup.meta });
   
       // Create the user:
       }).then(function() {
         return res_driver.put('/'+_Setup.user._id, _Setup.user,
-            {_meta: _Setup.meta})
-
+          {_meta: _Setup.meta})
       }).then(function() {
         return users_driver.set(_Setup.user.username, _Setup.auth_user);
 

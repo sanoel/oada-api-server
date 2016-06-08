@@ -1,6 +1,7 @@
 // Creates example setup for valleyix
 var Promise = require('bluebird');
 var _ = require('lodash');
+var bair = require('./Bair100.js');
 
 var singleton = null;
 
@@ -52,6 +53,7 @@ module.exports = function(config) {
           },
         },
       };
+      
       if (opts.noclients) return ret;
       ret.clients = {
         _meta: { _mediaType: 'application/vnd.oada.clients.1+json' },
