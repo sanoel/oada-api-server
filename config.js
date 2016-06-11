@@ -20,7 +20,7 @@ module.exports = function() {
   var _Config = {
 
     name: 'OADA API server',
-    log_level: 'trace',  // trace, debug, info, warn, error, fatal
+    log_level: 'debug',  // trace, debug, info, warn, error, fatal
 
     // Things needed to start the server:
     // (Has to be a function because it refers to other _Config info

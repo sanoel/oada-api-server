@@ -53,8 +53,8 @@ module.exports = function(config) {
     setup: function() {
       // Create the resource:
       return res_driver.put('/'+_Setup.resource._id,
- //       _.cloneDeep(_Setup.resource),  // PUT will remove the _id without cloning: don't want that!
-          _.cloneDeep(bair),
+        _.cloneDeep(_Setup.resource),  // PUT will remove the _id without cloning: don't want that!
+//          _.cloneDeep(bair),
         { _meta: _Setup.meta }
   
       // Create the bookmark:
