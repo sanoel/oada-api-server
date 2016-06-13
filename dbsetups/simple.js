@@ -2,7 +2,6 @@
 // and creates one resource at id 123.
 var Promise = require('bluebird');
 var _ = require('lodash');
-var bair = require('./Bair100.js');
 
 var singleton = null;
 
